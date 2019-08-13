@@ -52,13 +52,23 @@ Several bash aliases are present in the root directory's `.bash_aliases` file.
 | ALIAS | FUNCTION  |
 | ---   | ---       |
 | `aliasfile`       | opens the alias file for editing  |
-| `reload`          | reloads the shell                 |
+| `aliasreload`     | reloads the shell                 |
+| `sweep`           | deletes `.bash_history` and closes the terminal |
 | `init-divi-conf`  | resets `divisetup-run.sh` to reconfigure `divid` on next boot |
 | `dli`             | alias for `./divi-cli`. Run any `divi-cli` command with `dli <command>` |
 | `dividebug`       | tails the debug log |
 | `divistart`       | starts `./divid`  |
+| `diviservicestart`| starts the `divid.service` system service |
+| `diviservicestop` | stops `divid.service` |
+| `diviservicestatus`| prints the `divid.service` status for debugging |
+| `diviclearcache`  | removes unnecessary data directory files |
+| `divirefresh`     | starts `./divid` with the `-reindex` flag |
+| `divirescan`      | starts `./divid` with the `-rescan` flag |
 | `dividir`         | quick access to the `DIVI` directory  |
 | `datadir`         | quick access tho the Divi data directory where config files, etc. are found | 
+| `diviuserdelete`  | **DANGER:** This command removes all user-specific files, including `wallet.dat`. Use with extreme caution|
+| 
+
 
 
 
