@@ -26,12 +26,16 @@ The autostart configuration can be found at `~/.config/lxsession/LXDE-pi/autosta
 
 ### Divi Config Script (first run)
 
+This process is automated and does not require any user input. The divi daemon (`divid`) is run at the system level as a service. 
+
 A script called `divisetup-run.sh` will run the first time the image is booted. It is located at `/home/pi/divisetup-run.sh` and performs the following actions:
 
-* Prompts user for rpc username and writes to `~/.divi/divi.conf`
-* Randomly generates an rpc password using the SHA256 hashing algorithm and writes it to `divi.conf`
+* Searches the `.divi` data directory for `divi.conf`
+* Randomly generates an rpc username & password using the SHA256 hashing algorithm and writes it to `divi.conf`
+* Writes `daemon=0` to the `divi.conf` file
 * Renames `divisetup-run.sh` to `divisetup-complete.sh`
-* Writes `daemon=1` to the `divi.conf` file
+* Starts `divid.service`
+*If `~/.divi/divi.conf` exists already, only the final step will run.*
 
 ### Divi Config Script (subsequent runs)
 
@@ -39,7 +43,6 @@ After the initial setup, a script named `divi-startup.sh` runs on boot. It is lo
 
 * Checks for `divisetup-complete.sh`
 * If not found, runs `divisetup-run.sh`
-* Runs the daemon
 
 ### Divi Shutdown Script
 
@@ -67,7 +70,6 @@ Several bash aliases are present in the root directory's `.bash_aliases` file.
 | `dividir`         | quick access to the `DIVI` directory  |
 | `datadir`         | quick access tho the Divi data directory where config files, etc. are found | 
 | `diviuserdelete`  | **DANGER:** This command removes all user-specific files, including `wallet.dat`. Use with extreme caution|
-| 
 
 
 
