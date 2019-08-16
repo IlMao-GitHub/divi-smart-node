@@ -7,7 +7,7 @@ We recommend a Raspberry Pi 3b+ device with a 64GB Class 10 microSD card. This i
 **Note: While no issues have been found with this implementation, this software is considered to be in an Alpha stage. Use at your own risk and *always* back up your mnemonic seed phrase before transacting with any real funds**
 
 # Instructions
-1. [Download](https://divi-smart-node.sfo2.cdn.digitaloceanspaces.com/divi-smart-node-0.0.1-alpha.img.gz) the latest image.
+1. [Download](https://divi-smart-node.sfo2.cdn.digitaloceanspaces.com/divi-smart-node-0.0.2-alpha.img.gz) the latest image.
 2. Use [Etcher](https://www.balena.io/etcher/) or similar software to flash the image to a microSD Card (64GB recommended).
 3. Insert the flashed microSD card into your Raspberry Pi 3b+ device and turn on.
 4. On boot, you will be prompted to enter an RPC username, type one of your choosing and press `ENTER`.
@@ -26,12 +26,16 @@ The autostart configuration can be found at `~/.config/lxsession/LXDE-pi/autosta
 
 ### Divi Config Script (first run)
 
+This process is automated and does not require any user input. The divi daemon (`divid`) is run at the system level as a service. 
+
 A script called `divisetup-run.sh` will run the first time the image is booted. It is located at `/home/pi/divisetup-run.sh` and performs the following actions:
 
-* Prompts user for rpc username and writes to `~/.divi/divi.conf`
-* Randomly generates an rpc password using the SHA256 hashing algorithm and writes it to `divi.conf`
+* Searches the `.divi` data directory for `divi.conf`
+* Randomly generates an rpc username & password using the SHA256 hashing algorithm and writes it to `divi.conf`
+* Writes `daemon=0` to the `divi.conf` file
 * Renames `divisetup-run.sh` to `divisetup-complete.sh`
-* Writes `daemon=1` to the `divi.conf` file
+* Starts `divid.service`
+*If `~/.divi/divi.conf` exists already, only the final step will run.*
 
 ### Divi Config Script (subsequent runs)
 
@@ -39,7 +43,6 @@ After the initial setup, a script named `divi-startup.sh` runs on boot. It is lo
 
 * Checks for `divisetup-complete.sh`
 * If not found, runs `divisetup-run.sh`
-* Runs the daemon
 
 ### Divi Shutdown Script
 
@@ -52,13 +55,22 @@ Several bash aliases are present in the root directory's `.bash_aliases` file.
 | ALIAS | FUNCTION  |
 | ---   | ---       |
 | `aliasfile`       | opens the alias file for editing  |
-| `reload`          | reloads the shell                 |
+| `aliasreload`     | reloads the shell                 |
+| `sweep`           | deletes `.bash_history` and closes the terminal |
 | `init-divi-conf`  | resets `divisetup-run.sh` to reconfigure `divid` on next boot |
 | `dli`             | alias for `./divi-cli`. Run any `divi-cli` command with `dli <command>` |
 | `dividebug`       | tails the debug log |
 | `divistart`       | starts `./divid`  |
+| `diviservicestart`| starts the `divid.service` system service |
+| `diviservicestop` | stops `divid.service` |
+| `diviservicestatus`| prints the `divid.service` status for debugging |
+| `diviclearcache`  | removes unnecessary data directory files |
+| `divirefresh`     | starts `./divid` with the `-reindex` flag |
+| `divirescan`      | starts `./divid` with the `-rescan` flag |
 | `dividir`         | quick access to the `DIVI` directory  |
 | `datadir`         | quick access tho the Divi data directory where config files, etc. are found | 
+| `diviuserdelete`  | **DANGER:** This command removes all user-specific files, including `wallet.dat`. Use with extreme caution|
+
 
 
 
