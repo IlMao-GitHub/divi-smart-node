@@ -2,7 +2,7 @@
 Get a Divi core node up and running on a Raspberry Pi device in a flash (pun intended).
 
 # System requirements
-We recommend a Raspberry Pi 3b+ device with a 64GB Class 10 microSD card. This is the only configuration on which this implementation has been tested.
+We recommend a Raspberry Pi 4 device with a 32GB Class 10 microSD card and 4GB of RAM. This is the only configuration on which this implementation has been tested.
 
 **Note: While no issues have been found with this implementation, this software is considered to be in an Alpha stage. Use at your own risk and *always* back up your mnemonic seed phrase before transacting with any real funds**
 
