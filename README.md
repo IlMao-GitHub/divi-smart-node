@@ -7,7 +7,8 @@ We recommend a Raspberry Pi 3b+ device with a 64GB Class 10 microSD card. This i
 **Note: While no issues have been found with this implementation, this software is considered to be in an Alpha stage. Use at your own risk and *always* back up your mnemonic seed phrase before transacting with any real funds**
 
 # Instructions
-1. [Download](https://divi-smart-node.sfo2.cdn.digitaloceanspaces.com/divi-smart-node-0.0.2-alpha.img.gz) the latest image.
+1. [Download](https://divi-smart-node.sfo2.cdn.digitaloceanspaces.com/divi-smart-node-0.0.3-alpha.img.gz) the latest image.
+*Note: The latest image is for the Raspberry Pi 4. If you would like the older, 3b+ image, [click here](https://divi-smart-node.sfo2.cdn.digitaloceanspaces.com/divi-smart-node-0.0.2-alpha.img.gz)*
 2. Use [Etcher](https://www.balena.io/etcher/) or similar software to flash the image to a microSD Card (64GB recommended).
 3. Insert the flashed microSD card into your Raspberry Pi 3b+ device and turn on.
 4. On boot, you will be prompted to enter an RPC username, type one of your choosing and press `ENTER`.
